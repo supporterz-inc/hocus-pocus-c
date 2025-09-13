@@ -1,0 +1,28 @@
+name: CI on Pull Request
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ソースコードのダウンロード
+        uses: actions/checkout@v4
+
+      - name: Node.js のセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: 依存関係のインストール
+        run: npm ci
+
+      - name: ビルドが成功するか？
+        run: echo 'TODO:『CI / CD のプラクティス』で実装する'
+
+      - name: テストが成功するか？
+        run: echo 'TODO:『CI / CD のプラクティス』で実装する'
