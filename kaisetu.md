@@ -127,3 +127,4 @@ export function KnowledgeListFeature({ userId, knowledges }: Props) {
 このように、Hocus Pocus は、ユーザーからのリクエストを `router` が受け取り、`controller` が処理を進行させ、`model` がデータベースとのやり取りを行い、`feature` が画面を生成する、という流れで動作しています。
 
 これから皆さんが実装する「ナレッジ作成」機能も、基本的にはこの流れに沿って実装していくことになります。このドキュメントが、皆さんの実装の助けになれば幸いです。
+
