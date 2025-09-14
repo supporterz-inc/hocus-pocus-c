@@ -16,9 +16,16 @@ async function upsert(knowledge: Knowledge): Promise<void> {
   await writeFile(path, content, 'utf-8');
 }
 
+async function getByKnowledgeId(knowledgeId: string): Promise<Knowledge> {
+  //Promise 非同期処理をするときに書く?
+  const path = `./storage/${knowledgeId}.json`;
+  const content = await readFile(path, 'utf-8');
+
+  return JSON.parse(content);
+}
+
 export const KnowledgeRepository = {
-  // biome-ignore lint/suspicious/noExplicitAny: TODO: (学生向け) 実装する
-  getByKnowledgeId: (_: string): Promise<Knowledge> => undefined as any,
+  getByKnowledgeId,
 
   // biome-ignore lint/suspicious/noExplicitAny: TODO: (学生向け) 実装する
   getByAuthorId: (_: string): Promise<Knowledge[]> => undefined as any,

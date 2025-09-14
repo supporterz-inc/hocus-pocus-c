@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { getAllKnowledgesController } from './controllers/get-all-knowledges.controller.js';
+import { getKnowledgeByIdController } from './controllers/get-knowledge-by-id.controller.js';
 import { getNewKnowledgeController } from './controllers/get-new-knowledge.controller.js';
 import { postKnowledgeController } from './controllers/post-knowledge.controller.js';
 
@@ -33,4 +34,11 @@ router.post('/knowledges', async (ctx) => {
   });
 
   return ctx.redirect('/');
+});
+
+router.get('/knowledges/:knowledgeId', async (ctx) => {
+  const userId = ctx.get('userId');
+  const { knowledgeId } = ctx.req.param();
+
+  return ctx.html(await getKnowledgeByIdController(userId, knowledgeId));
 });
