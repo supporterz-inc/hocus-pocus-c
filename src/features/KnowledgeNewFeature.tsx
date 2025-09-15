@@ -5,8 +5,13 @@ export function KnowledgeNewFeature() {
     <Layout title="新規ナレッジ投稿">
       {/* Header */}
       <header class="bg-main border-b border-border p-4 flex justify-between items-center">
-        <h1 class="text-xl font-bold text-text-main">
-          <a href="/">Hocus Pocus</a>
+        <h1 class="text-xl font-bold text-text-main ">
+          <a
+            class="bg-lime-500 border border-lime-600 text-white font-extrabold text-2xl leading-none px-4 py-2 rounded-lg shadow inline-block"
+            href="/"
+          >
+            Hocus Pocus
+          </a>
         </h1>
       </header>
 
