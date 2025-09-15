@@ -23,8 +23,7 @@ router.get('/', (ctx) => {
 });
 
 router.get('/knowledges/new', (ctx) => {
-  const userId = ctx.get('userId');
-  return ctx.html(getNewKnowledgeController(userId));
+  return ctx.html(getNewKnowledgeController());
 });
 
 router.post('/knowledges', async (ctx) => {
