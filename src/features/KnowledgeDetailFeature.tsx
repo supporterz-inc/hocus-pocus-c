@@ -15,15 +15,18 @@ export function KnowledgeDetailFeature({ knowledge, userId }: KnowledgeDetailFea
 
   return (
     <Layout title={knowledge.title}>
-      <article className="prose lg:prose-xl">
-        {isAuthor && (
-          <a className="button-primary" href={`/knowledges/${knowledge.knowledgeId}/edit`}>
-            編集する
-          </a>
-        )}
-        <h1>{knowledge.title}</h1>
-        <pre>{raw(html)}</pre>
+      <article className="prose lg:prose-xl [&_*]:my-2">
+        <h1 className="text-center">{knowledge.title}</h1>
+        <div>{raw(html)}</div>
       </article>
+      {isAuthor && (
+        <a
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded no-underline"
+          href={`/knowledges/${knowledge.knowledgeId}/edit`}
+        >
+          編集する
+        </a>
+      )}
       <Button path="/" text="一覧に戻る" />
     </Layout>
   );

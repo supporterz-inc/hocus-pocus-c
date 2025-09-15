@@ -10,7 +10,7 @@ interface Props {
 export function KnowledgeListFeature({ userId, knowledges }: Props) {
   return (
     <Layout title="ナレッジ一覧">
-      <p>
+      <p className="text-center">
         こんにちは <span class="text-blue-500 font-bold">{userId}</span> さん
       </p>
       <Button path="knowledges/new" text="ナレッジを新規作成する" />
