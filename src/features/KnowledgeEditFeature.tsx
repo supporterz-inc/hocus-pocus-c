@@ -9,6 +9,12 @@ export function KnowledgeEditFeature({ knowledge }: KnowledgeEditFeatureProps) {
   return (
     <Layout title="ナレッジ更新">
       <form action={`/knowledges/${knowledge.knowledgeId}`} className="flex flex-col gap-y-4" method="post">
+        <input
+          className="w-full rounded-md border border-gray-300 p-2"
+          name="title"
+          type="text"
+          value={knowledge.title}
+        />
         <textarea className="h-96 w-full resize-y rounded-md border border-gray-300 p-2" name="content">
           {knowledge.content}
         </textarea>
