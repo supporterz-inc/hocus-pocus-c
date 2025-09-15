@@ -1,4 +1,4 @@
-import { glob, readFile, writeFile } from 'node:fs/promises';
+import { glob, readFile, rm, writeFile } from 'node:fs/promises';
 import type { Knowledge } from './knowledge.model.js';
 
 async function getAll(): Promise<Knowledge[]> {
@@ -24,6 +24,12 @@ async function getByKnowledgeId(knowledgeId: string): Promise<Knowledge> {
   return JSON.parse(content);
 }
 
+async function deleteByKnowledgeId(knowledgeId: string): Promise<void> {
+  const path = `./storage/${knowledgeId}.json`;
+
+  await rm(path);
+}
+
 export const KnowledgeRepository = {
   getByKnowledgeId,
 
@@ -34,6 +40,5 @@ export const KnowledgeRepository = {
 
   upsert,
 
-  // biome-ignore lint/suspicious/noExplicitAny: TODO: (学生向け) 実装する
-  deleteByKnowledgeId: (_: string): Promise<void> => undefined as any,
+  deleteByKnowledgeId,
 };

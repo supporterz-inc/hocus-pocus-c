@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { deleteKnowledgeController } from './controllers/delete-knowledge.controller.js';
 import { getAllKnowledgesController } from './controllers/get-all-knowledges.controller.js';
 import { getEditKnowledgeController } from './controllers/get-edit-knowledge.controller.js';
 import { getKnowledgeByIdController } from './controllers/get-knowledge-by-id.controller.js';
@@ -64,4 +65,13 @@ router.post('/knowledges/:knowledgeId', async (ctx) => {
   });
 
   return ctx.redirect(`/knowledges/${knowledgeId}`);
+});
+
+router.post('/knowledges/:knowledgeId/delete', async (ctx) => {
+  const userId = ctx.get('userId');
+  const { knowledgeId } = ctx.req.param(); //URLから文字列を取ってくる
+
+  await deleteKnowledgeController(userId, knowledgeId);
+
+  return ctx.redirect('/');
 });
