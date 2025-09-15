@@ -6,7 +6,6 @@ interface KnowledgeEditFeatureProps {
 }
 
 export function KnowledgeEditFeature({ knowledge }: KnowledgeEditFeatureProps) {
-  console.log(knowledge);
   return (
     <Layout title="ナレッジ更新">
       <form action={`/knowledges/${knowledge.knowledgeId}`} className="flex flex-col gap-y-4" method="post">
@@ -17,6 +16,19 @@ export function KnowledgeEditFeature({ knowledge }: KnowledgeEditFeatureProps) {
           更新する
         </button>
       </form>
+      <div className="mt-8 border-t border-red-400 pt-4">
+        <form action={`/knowledges/${knowledge.knowledgeId}/delete`} method="post">
+          <button
+            className="rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+            onClick={(e) => {
+              if (!window.confirm('本当にこのナレッジを削除しますか？')) e.preventDefault();
+            }}
+            type="submit"
+          >
+            このナレッジを削除する
+          </button>
+        </form>
+      </div>
     </Layout>
   );
 }
