@@ -22,7 +22,7 @@ jobs:
         run: npm ci
 
       - name: ビルドが成功するか？
-        run: echo 'TODO:『CI / CD のプラクティス』で実装する'
+        run: npm run build
 
       - name: テストが成功するか？
-        run: echo 'TODO:『CI / CD のプラクティス』で実装する'
+        run: npm run test

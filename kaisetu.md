@@ -128,4 +128,3 @@ export function KnowledgeListFeature({ userId, knowledges }: Props) {
 
 これから皆さんが実装する「ナレッジ作成」機能も、基本的にはこの流れに沿って実装していくことになります。このドキュメントが、皆さんの実装の助けになれば幸いです。
 
-

@@ -16,12 +16,15 @@
   "version": "2.0.1",
   "dependencies": {
     "@hono/node-server": "^1.16.0",
+    "@types/marked": "^5.0.2",
     "hono": "^4.8.5",
-    "jose": "^6.0.12"
+    "jose": "^6.0.12",
+    "marked": "^16.2.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.1.2",
     "@tailwindcss/cli": "^4.1.11",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^24.0.14",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3",
