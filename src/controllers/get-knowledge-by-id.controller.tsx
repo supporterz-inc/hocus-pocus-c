@@ -6,5 +6,5 @@ export async function getKnowledgeByIdController(userId: string, knowledgeId: st
 
   const knowledge = await KnowledgeRepository.getByKnowledgeId(knowledgeId);
 
-  return <KnowledgeDetailFeature knowledge={knowledge} />;
+  return <KnowledgeDetailFeature knowledge={knowledge} userId={userId} />;
 }

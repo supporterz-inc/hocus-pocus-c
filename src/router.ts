@@ -1,7 +1,9 @@
 import { Hono } from 'hono';
 import { getAllKnowledgesController } from './controllers/get-all-knowledges.controller.js';
+import { getEditKnowledgeController } from './controllers/get-edit-knowledge.controller.js';
 import { getKnowledgeByIdController } from './controllers/get-knowledge-by-id.controller.js';
 import { getNewKnowledgeController } from './controllers/get-new-knowledge.controller.js';
+import { patchKnowledgeController } from './controllers/patch-knowledge.controller.js';
 import { postKnowledgeController } from './controllers/post-knowledge.controller.js';
 
 export interface Variables {
@@ -41,4 +43,25 @@ router.get('/knowledges/:knowledgeId', async (ctx) => {
   const { knowledgeId } = ctx.req.param();
 
   return ctx.html(await getKnowledgeByIdController(userId, knowledgeId));
+});
+
+router.get('/knowledges/:knowledgeId/edit', async (ctx) => {
+  const userId = ctx.get('userId');
+  const { knowledgeId } = ctx.req.param();
+
+  return ctx.html(await getEditKnowledgeController(userId, knowledgeId));
+});
+
+router.post('/knowledges/:knowledgeId', async (ctx) => {
+  const userId = ctx.get('userId');
+  const { knowledgeId } = ctx.req.param();
+  const form = await ctx.req.formData();
+
+  await patchKnowledgeController({
+    userId,
+    knowledgeId,
+    content: form.get('content') as string,
+  });
+
+  return ctx.redirect(`/knowledges/${knowledgeId}`);
 });
