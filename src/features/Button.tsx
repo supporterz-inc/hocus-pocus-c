@@ -1,14 +1,20 @@
 interface Props {
   text: string;
   path: string;
+  variant?: 'primary' | 'secondary';
 }
 
-export function Button({ text, path }: Props) {
+export function Button({ text, path, variant = 'primary' }: Props) {
+  const baseClasses = 'font-bold py-2 px-4 rounded transition-all no-underline inline-block';
+
+  const styles = {
+    primary: 'bg-accent hover:brightness-90 text-text-main',
+    secondary: 'bg-transparent text-text-sub hover:bg-gray-200',
+  };
+
   return (
-    <div class="my-4">
-      <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href={path}>
-        {text}
-      </a>
-    </div>
+    <a class={`${baseClasses} ${styles[variant]}`} href={path}>
+      {text}
+    </a>
   );
 }
