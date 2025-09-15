@@ -15,7 +15,7 @@ export function Layout({ title, children }: PropsWithChildren<Props>) {
       </head>
 
       <body>
-        <div class="w-[375px] mx-auto">{children}</div>
+        <div class="w-full max-w-mobile mx-auto">{children}</div>
       </body>
     </html>
   );

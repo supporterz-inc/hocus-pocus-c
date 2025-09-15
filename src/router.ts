@@ -33,6 +33,7 @@ router.post('/knowledges', async (ctx) => {
   await postKnowledgeController({
     userId,
     content: form.get('content') as string,
+    title: form.get('title') as string,
   });
 
   return ctx.redirect('/');
@@ -60,6 +61,7 @@ router.post('/knowledges/:knowledgeId', async (ctx) => {
   await patchKnowledgeController({
     userId,
     knowledgeId,
+    title: form.get('title') as string,
     content: form.get('content') as string,
   });
 
