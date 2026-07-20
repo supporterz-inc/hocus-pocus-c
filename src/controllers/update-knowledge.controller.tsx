@@ -1,5 +1,5 @@
 import { KnowledgeRepository } from '../models/knowledge.repository.js';
-import type { Knowledge } from '../models/knowledge.model.js';
+import { Knowledge } from '../models/knowledge.model.js';
 
 interface UpdateInput {
   title: string;
@@ -33,7 +33,6 @@ export async function updateKnowledgeController(
   // 3. データを上書きして upsert を呼ぶ
   const updatedKnowledge: Knowledge = {
     ...currentKnowledge,
-    title: input.title,
     content: input.content,
     // updatedAt: new Date().toISOString() // もし更新日時の項目があれば入れる
   };
