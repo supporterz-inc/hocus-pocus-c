@@ -1,5 +1,4 @@
-import { glob, readFile } from 'node:fs/promises';
-
+import { glob, readFile, writeFile } from 'node:fs/promises'; 
 import type { Knowledge } from './knowledge.model.js';
 
 async function getAll(): Promise<Knowledge[]> {
@@ -8,6 +7,16 @@ async function getAll(): Promise<Knowledge[]> {
   const knowledges = await Promise.all(files.map((file) => readFile(file, 'utf-8').then(JSON.parse)));
 
   return knowledges;
+}
+
+async function upsert(knowledge: Knowledge): Promise<void> {
+  // パスを「./storage/ナレッジID.json」にする
+  const filePath = `./storage/${knowledge.knowledgeId}.json`;
+  
+  // JSONオブジェクトを文字列に変換してファイルに書き込む（インデント2スペースで見やすく）
+  const data = JSON.stringify(knowledge, null, 2);
+  
+  await writeFile(filePath, data, 'utf-8');
 }
 
 export const KnowledgeRepository = {
@@ -19,8 +28,7 @@ export const KnowledgeRepository = {
 
   getAll,
 
-  // biome-ignore lint/suspicious/noExplicitAny: TODO: (学生向け) 実装する
-  upsert: (_: Knowledge): Promise<void> => undefined as any,
+  upsert,
 
   // biome-ignore lint/suspicious/noExplicitAny: TODO: (学生向け) 実装する
   deleteByKnowledgeId: (_: string): Promise<void> => undefined as any,
