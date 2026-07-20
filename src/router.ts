@@ -20,16 +20,16 @@ router.get('/', (ctx) => {
 router.post('/knowledges/:id/edit', async (ctx) => {
   const userId = ctx.get('userId');
   const knowledgeId = ctx.req.param('id');
-  
+
   // フォームから送信されたデータ（title, content）を受け取る
   const body = await ctx.req.parseBody();
-  const title = String(body.title);
-  const content = String(body.content);
+  const title = String(body['title']);
+  const content = String(body['content']);
 
   try {
     // 作成した Controller を呼び出す
     await updateKnowledgeController(userId, knowledgeId, { title, content });
-    
+
     // 更新が成功したら、トップページ（一覧）か詳細ページにリダイレクトする
     return ctx.redirect('/');
   } catch (error) {
