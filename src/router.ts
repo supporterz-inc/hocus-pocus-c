@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { editKnowledgePageController } from './controllers/edit-knowledge-page.controller.js';
 import { getAllKnowledgesController } from './controllers/get-all-knowledges.controller.js';
+import { getKnowledgeController } from './controllers/get-knowledge.controller.js';
 import { updateKnowledgeController } from './controllers/update-knowledge.controller.js';
 
 export interface Variables {
@@ -18,6 +19,21 @@ router.get('/', (ctx) => {
   return ctx.html(getAllKnowledgesController(userId));
 });
 
+// 1. 新しい記事を「投稿（POST）」するための受付窓口
+router.post('/knowledges/', async (ctx) => {
+  const body = await ctx.req.parseBody();
+  console.log('送られてきたデータ:', body);
+  return ctx.redirect('/');
+});
+
+// 2. 詳細画面を表示する窓口
+router.get('/knowledges/:knowledgeId', async (ctx) => {
+  const knowledgeId = ctx.req.param('knowledgeId');
+  const component = await getKnowledgeController(knowledgeId);
+  return ctx.html(component as never);
+});
+
+// 3. 編集画面を表示する窓口
 router.get('/knowledges/:id/edit', async (ctx) => {
   const userId = ctx.get('userId');
   const knowledgeId = ctx.req.param('id');
@@ -31,6 +47,7 @@ router.get('/knowledges/:id/edit', async (ctx) => {
   }
 });
 
+// 4. 更新処理を受け付ける窓口
 router.post('/knowledges/:id/edit', async (ctx) => {
   const userId = ctx.get('userId');
   const knowledgeId = ctx.req.param('id');

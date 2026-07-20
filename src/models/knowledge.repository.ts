@@ -20,8 +20,11 @@ async function upsert(knowledge: Knowledge): Promise<void> {
 }
 
 export const KnowledgeRepository = {
-  // biome-ignore lint/suspicious/noExplicitAny: TODO: (学生向け) 実装する
-  getByKnowledgeId: (_: string): Promise<Knowledge> => undefined as any,
+  getByKnowledgeId: async (knowledgeId: string): Promise<Knowledge | null> => {
+    const allknowledges = await getAll();
+    const found = allknowledges.find((k) => k.knowledgeId === knowledgeId);
+    return found ?? null;
+  },
 
   // biome-ignore lint/suspicious/noExplicitAny: TODO: (学生向け) 実装する
   getByAuthorId: (_: string): Promise<Knowledge[]> => undefined as any,
