@@ -1,4 +1,4 @@
-import { glob, readFile, writeFile } from 'node:fs/promises'; 
+import { glob, mkdir, readFile, writeFile } from 'node:fs/promises';
 import type { Knowledge } from './knowledge.model.js';
 
 async function getAll(): Promise<Knowledge[]> {
@@ -10,12 +10,16 @@ async function getAll(): Promise<Knowledge[]> {
 }
 
 async function upsert(knowledge: Knowledge): Promise<void> {
-  // パスを「./storage/ナレッジID.json」にする
+  // ステップ 1: ./storage ディレクトリを作成（なければ作成、あれば何もしない）
+  await mkdir('./storage', { recursive: true });
+
+  // ステップ 2: パスを「./storage/ナレッジID.json」にする
   const filePath = `./storage/${knowledge.knowledgeId}.json`;
   
-  // JSONオブジェクトを文字列に変換してファイルに書き込む（インデント2スペースで見やすく）
+  // ステップ 3: JSONオブジェクトを文字列に変換してファイルに書き込む（インデント2スペースで見やすく）
   const data = JSON.stringify(knowledge, null, 2);
   
+  // ステップ 4: ファイルに書き込む（UTF-8 形式）
   await writeFile(filePath, data, 'utf-8');
 }
 

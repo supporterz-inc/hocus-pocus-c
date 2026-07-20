@@ -12,6 +12,14 @@ export function KnowledgeListFeature({ userId, knowledges }: Props) {
       <p>
         こんにちは <span class="text-blue-500 font-bold">{userId}</span> さん
       </p>
+
+      {/* 追加-ナレッジ作成リンク */}
+      <p class="mt-4">
+        <a class="text-white bg-blue-500 px-3 py-2 rounded" href="/create">
+          ナレッジを作成
+        </a>
+      </p>
+
       {knowledges.length ? (
         <ul>
           {knowledges.map((knowledge) => (
